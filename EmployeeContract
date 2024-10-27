@@ -1,0 +1,104 @@
+from datetime import datetime
+
+class EmployeeContract:
+    def __init__(self, employee_name, position, start_date, salary, employment_type):
+        """
+        Initialize an Employee Contract with essential details.
+        
+        Parameters:
+        - employee_name (str): The name of the employee.
+        - position (str): The position or job title.
+        - start_date (str): The starting date of employment (format: 'YYYY-MM-DD').
+        - salary (float): The annual salary or hourly wage.
+        - employment_type (str): Type of employment (e.g., "Full-Time", "Part-Time", "Contract").
+        """
+        try:
+            self.start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError("Invalid date format. Please use 'YYYY-MM-DD'.")
+        
+        self.employee_name = employee_name
+        self.position = position
+        self.salary = salary
+        self.employment_type = employment_type
+        self.benefits = []
+        self.confidentiality_clause = ""
+        self.termination_conditions = ""
+
+    def add_benefit(self, benefit):
+        """
+        Add a benefit to the employee contract.
+        
+        Parameters:
+        - benefit (str): Description of the benefit (e.g., "Health Insurance").
+        """
+        self.benefits.append(benefit)
+
+    def set_confidentiality_clause(self, clause):
+        """
+        Set a confidentiality clause in the contract.
+        
+        Parameters:
+        - clause (str): Description of the confidentiality clause.
+        """
+        self.confidentiality_clause = clause
+
+    def set_termination_conditions(self, conditions):
+        """
+        Set the conditions under which the employment can be terminated.
+        
+        Parameters:
+        - conditions (str): Description of termination conditions.
+        """
+        self.termination_conditions = conditions
+
+    def display_contract(self):
+        """
+        Display the complete employee contract.
+        """
+        print(f"=== Employee Contract for {self.employee_name} ===")
+        print(f"Position            : {self.position}")
+        print(f"Start Date          : {self.start_date.strftime('%Y-%m-%d')}")
+        print(f"Salary              : ${self.salary:,.2f} per year")
+        print(f"Employment Type     : {self.employment_type}")
+        
+        print("\nBenefits:")
+        for benefit in self.benefits:
+            print(f"  - {benefit}")
+        
+        print(f"\nConfidentiality Clause: {self.confidentiality_clause}")
+        print(f"\nTermination Conditions: {self.termination_conditions}")
+
+
+class OfferLetter:
+    def __init__(self, employee_name, position, start_date, starting_salary, hiring_manager):
+        """
+        Initialize an Offer Letter with essential details.
+        
+        Parameters:
+        - employee_name (str): The name of the candidate.
+        - position (str): The position or job title offered.
+        - start_date (str): The start date for the position (format: 'YYYY-MM-DD').
+        - starting_salary (float): The starting salary for the position.
+        - hiring_manager (str): The name of the hiring manager.
+        """
+        try:
+            self.start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError("Invalid date format. Please use 'YYYY-MM-DD'.")
+        
+        self.employee_name = employee_name
+        self.position = position
+        self.starting_salary = starting_salary
+        self.hiring_manager = hiring_manager
+
+    def display_offer_letter(self):
+        """
+        Display the offer letter.
+        """
+        print(f"=== Offer Letter ===")
+        print(f"Dear {self.employee_name},\n")
+        print(f"We are pleased to offer you the position of {self.position} at our company.")
+        print(f"Your start date will be {self.start_date.strftime('%Y-%m-%d')}, and your starting salary will be ${self.starting_salary:,.2f} per year.")
+        print("\nPlease note that this offer is contingent upon successful completion of background checks and other pre-employment conditions.\n")
+        print(f"We look forward to welcoming you to the team!\n\nBest regards,\n{self.hiring_manager}")
